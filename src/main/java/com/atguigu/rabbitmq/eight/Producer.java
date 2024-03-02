@@ -21,9 +21,16 @@ public class Producer {
                 .expiration("10000").build();*/
 
         //死信消息
+
+        //优先级
+        AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().priority(5).build();
         for (int i = 1; i < 11; i++) {
             String message = "info" + i;
-            channel.basicPublish(NORMAL_EXCHANGE,"zhangsan",null,message.getBytes());
+            if (i == 5){
+                channel.basicPublish(NORMAL_EXCHANGE,"zhangsan",properties,message.getBytes());
+            } else {
+                channel.basicPublish(NORMAL_EXCHANGE,"zhangsan",null,message.getBytes());
+            }
         }
 
     }

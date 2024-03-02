@@ -4,6 +4,7 @@ import com.atguigu.rabbitmq.util.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -23,7 +24,7 @@ public class Task02 {
         while (scanner.hasNext()){
             String message = scanner.next();
             //MessageProperties.PERSISTENT_TEXT_PLAIN 消息持久化
-            channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
+            channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes(StandardCharsets.UTF_8));
             System.out.println("生产者发出消息：" + message);
         }
 

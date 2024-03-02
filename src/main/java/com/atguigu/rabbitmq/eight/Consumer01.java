@@ -36,6 +36,9 @@ public class Consumer01 {
         //设置正常队列长度的限制
 //        arguments.put("x-max-length",6);
 
+        //设置队列的最大优先级 最大可以设置到 255 官网推荐 1-10 如果设置太高比较吃内存和 CPU
+        arguments.put("x-max-priority",10);
+
         channel.queueDeclare(NORMAL_QUEUE,false,false,false,arguments);
         //死信队列
         channel.queueDeclare(DEAD_QUEUE,false,false,false,null);
